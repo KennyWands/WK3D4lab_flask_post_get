@@ -1,0 +1,58 @@
+{#inner section to lay on base #}
+
+{% extends "base.html"%}
+
+{%block content%}
+<h1>My Todo List!</h1>
+
+<form class="form1" action="/Upcoming" method="post">{# links to app.route tasks post#}
+
+  <label for="start">Start date:</label>
+  <input type="date" id="start" name="date" value="02-06-2022" min="01-01-2022" max="31-12-2022">
+
+
+
+  <label id = "ontop"for="Event Name">name</label>
+  <input id = "under"type="text" name="name" id="nameID">
+
+  <label id = "ontop"for="Guests">guests</label>
+  <input id = "under"type="text" name="guests" id="guestID">
+
+  <label id = "ontop"for="Location">location</label>
+  <input id = "under"type="text" name="location" id="locationID">
+
+  <label id = "ontop"for="Description">Description</label>
+  <textarea id = "under" name="description" id="descriptionID" cols="30" rows="2"></textarea>
+
+  <label id = "ontop"for="Recurring Event?">Recurring Event</label>
+  <input id = "under"type="checkbox" name="recurring" id="Recurring">
+
+  <input type="submit" value="Submit">
+
+</form>
+
+
+{% for event in events %}
+<div>
+  <p>
+    {{ event.date }}: <b>{{ event.description }}</b>
+    {% if event.recurring %}{# bool so no comparison need#}
+    <span>&#9989</span>{# code for a tick box#}
+    {%endif%}
+  </p>
+
+</div>
+{% endfor %}
+<div>
+  <form action="/event/delete" , method="post">{# links to app.route tasks post#}
+    <p>
+      <label for="to_remove"> Event to remove</label>
+      <input type="text" name="to_remove">
+
+      <input type="submit" value="Submit">
+    </p>
+  </form>
+</div>
+
+
+{% endblock %}
